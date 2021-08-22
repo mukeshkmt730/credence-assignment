@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar {
+            background: blue;
+            height: 5vw;
+        }
+
+        ul {
+            display: flex;
+
+        }
+
+        li {
+            margin-top: 1.5vw;
+            margin-left: 3vw;
+            list-style: none;
+        }
+
+        a {
+            color: white;
+            font-weight: bold;
+            font-size: 2vw;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: red;
+        }
+
+        .formcontainer1 {
+            width: 50%;
+            margin: auto;
+
+        }
+
+        .formcontainer1 input {
+            width: 80%;
+            height: 1.8vw;
+            margin-bottom: 2%;
+            border: 2px solid black;
+
+        }
+
+        button {
+            width: 15%;
+            height: 2vw;
+            background: red;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: green;
+        }
+
+        .doc {
+            width: 50%;
+            border: 3px solid black;
+            margin: auto;
+            margin-top: 2%;
+            padding: 1%;
+        }
+
+        .formcontainer2 {
+            display: none;
+            width: 52%;
+            margin: auto;
+            margin-top: 2%;
+        }
+
+        .formcontainer2 input {
+            width: 100%;
+            height: 2vw;
+            margin-bottom: 2%;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <nav>
+            <ul>
+                <li><a href="/">HOME</a></li>
+                <li><a href="/create">CREATE</a></li>
+                <li><a href="/read">READ</a></li>
+                <li><a href="/update">UPDATE</a></li>
+                <li><a href="/delete">DELETE</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <h1 style="margin: 2%; text-align: center;">Update</h1>
+
+    <div class="formcontainer1">
+
+        <input type="text" name="name" id="nameInput" placeholder="Enter Name to Update Details">
+        <button onclick="funcName1()">button</button>
+    </div>
+
+    <div class="doc">
+        <div style="display: flex; margin-bottom: 2%;;">
+            <h3 style="color: red;width: 8%">Name:</h3>
+            <h3 id="name"></h3>
+        </div>
+        <div style="display: flex; margin-bottom: 2%;">
+            <h3 style="color: red;width: 8%">Image:</h3>
+            <h4 id="img"></h4>
+        </div>
+
+        <div style="display: flex; margin-bottom: 2%;">
+            <h3 style="color: red;width: 12%">Summary:</h3>
+            <p id="summary"></p>
+        </div>
+    </div>
+
+    <div class="formcontainer2">
+        <div>
+            <label for="">Name</label>
+            <input type="text" name="name" id="nameupdate">
+        </div>
+
+        <div>
+            <label for="">Image</label>
+            <input type="link" name="img" id="imgupdate">
+        </div>
+
+        <div>
+            <label for="">Summary</label>
+            <input type="text" name="summary" id="summupdate">
+        </div>
+
+
+        <button onclick="funcName2()">button</button>
+    </div>
+
+
+
+
+    <script>
+
+        async function funcName1() {
+            const input = document.getElementById("nameInput").value;
+
+
+            const url = `http://localhost:3000/getone/${input}`;
+            const response = await fetch(url);
+
+            var data = await response.json();
+
+            if (data == null) {
+                alert(`Cannot find ${input}, Please Enter Correct Name`)
+            } else {
+                document.getElementsByClassName('formcontainer2')[0].style.display = 'block';
+                document.getElementById('name').innerHTML = data.name;
+                document.getElementById('img').innerHTML = data.img;
+                document.getElementById('summary').innerHTML = data.summary;
+            }
+
+
+        }
+
+
+
+
+
+
+        async function funcName2() {
+            const input = document.getElementById("nameInput").value;
+
+            const uname = document.getElementById('nameupdate').value;
+            const uimg = document.getElementById('imgupdate').value;
+            const usumm = document.getElementById('summupdate').value;
+
+            const dataObject = {
+                "name": `${uname}`,
+                "img": `${uimg}`,
+                "summary": `${usumm}`
+            }
+
+            const url = `http://localhost:3000/update/${input}`;
+            await fetch(url, {
+                method: 'PUT', headers: {
+                    'Content-Type': 'application/json',
+                }, body: JSON.stringify(dataObject)
+            })
+
+
+        }
+
+    </script>
+
+</body>
+
+</html>

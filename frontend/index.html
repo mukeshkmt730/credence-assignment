@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar {
+            background: blue;
+            height: 5vw;
+        }
+
+        ul {
+            display: flex;
+
+        }
+
+        li {
+            margin-top: 1.5vw;
+            margin-left: 3vw;
+            list-style: none;
+        }
+
+        a {
+            color: white;
+            font-weight: bold;
+            font-size: 2vw;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: red;
+        }
+
+        .tableContainer {
+            width: 80vw;
+            margin: auto;
+            background: rgb(255, 255, 255, .6);
+            border: .5vmin solid black;
+            margin-bottom: 2%;
+
+        }
+
+        .tableHeader {
+            background: black;
+            color: white;
+            font-weight: bolder;
+            font-size: larger;
+        }
+
+        .uname {
+            width: 20%;
+        }
+
+        .image {
+            width: 30%;
+        }
+
+        .summary {
+            width: 50%;
+        }
+
+        td {
+            padding: 2%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <nav>
+            <ul>
+                <li><a href="/">HOME</a></li>
+                <li><a href="/create">CREATE</a></li>
+                <li><a href="/read">READ</a></li>
+                <li><a href="/update">UPDATE</a></li>
+                <li><a href="/delete">DELETE</a></li>
+            </ul>
+        </nav>
+    </div>
+    <h1 style="margin: 2%;text-align: center;">All Crud Operations</h1>
+
+    <div class="tableContainer">
+
+        <table id="tableId" style="width: 100%;" cellspacing="10">
+            <tr class="tableHeader">
+                <td class="uname">Name</td>
+                <td class="image">Image</td>
+                <td class="summary">Summary</td>
+            </tr>
+
+        </table>
+    </div>
+
+    <script>
+
+        async function func() {
+            const url = 'http://localhost:3000/getall';
+
+            const res = await fetch(url);
+
+            const data = await res.json();
+            const table = document.getElementById('tableId');
+
+            for (var i = 0; i < data.length; i++) {
+                var row = table.insertRow();
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                cell1.innerHTML = data[i].name;
+                cell2.innerHTML = data[i].img;
+                cell3.innerHTML = data[i].summary;
+            }
+
+
+
+        }
+
+        func();
+
+
+
+
+    </script>
+
+</body>
+
+</html>

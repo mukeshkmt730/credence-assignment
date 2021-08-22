@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar {
+            background: blue;
+            height: 5vw;
+        }
+
+        ul {
+            display: flex;
+
+        }
+
+        li {
+            margin-top: 1.5vw;
+            margin-left: 3vw;
+            list-style: none;
+        }
+
+        a {
+            color: white;
+            font-weight: bold;
+            font-size: 2vw;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: red;
+        }
+
+        .formcontainer{
+            width: 50%;
+            margin: auto;
+
+        }
+        input{
+            width: 100%;
+            height: 2vw;
+            margin-bottom: 2%;
+
+        }
+
+        button{
+            width: 15%;
+            height: 2vw;
+            background: red;
+            border-radius: 1vw;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <nav>
+            <ul>
+                <li><a href="/">HOME</a></li>
+                <li><a href="/create">CREATE</a></li>
+                <li><a href="/read">READ</a></li>
+                <li><a href="/update">UPDATE</a></li>
+                <li><a href="/delete">DELETE</a></li>
+            </ul>
+        </nav>
+    </div>
+    <h1 style="margin: 2%;text-align: center;">Create</h1>
+    <div class="formcontainer">
+        <form action="/create" method="POST">
+            <div>
+                <label for="">Name</label>
+                <input type="text" name="name">
+            </div>
+
+            <div>
+                <label for="">Image</label>
+                <input type="link" name="img">
+            </div>
+
+            <div>
+                <label for="">Summary</label>
+                <input type="text" name="summary">
+            </div>
+
+
+            <button>Submit</button>
+        </form>
+    </div>
+</body>
+
+</html>
